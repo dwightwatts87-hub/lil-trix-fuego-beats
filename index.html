@@ -3,212 +3,209 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Type Beat Store</title>
-<!-- Custom Font - replace with your font if available -->
+<title>Type Beat Store - Lil Trix Fuego</title>
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
-
+<!-- Basic styles -->
 <style>
-  body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #111;
-    color: #fff;
-  }
-
-  /* Logo/Header */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #111;
+  color: #fff;
+}
 .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #222;
-    padding: 20px;
-  }
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222;
+  padding: 20px;
+}
 .logo {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 48px;
-    color: #ff0055;
-    letter-spacing: 2px;
-  }
-
-.subtitle {
-    font-family: 'Arial', sans-serif;
-    font-size: 18px;
-    margin-top: 10px;
-    color: #ccc;
-  }
-
-  /* Upload Section */
-.upload-section {
-    padding: 20px;
-    text-align: center;
-    background-color: #333;
-  }
-
-.upload-section h2 {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 36px;
-    margin-bottom: 10px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 48px;
+  color: #ff0055;
 }
-
-.upload-input {
-    margin: 10px 0;
+.nav {
+  display: flex;
+  gap: 15px;
 }
-
-button.upload-btn {
-    background-color: #ff0055;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-family: 'Bebas Neue', cursive;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 5px;
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Bebas Neue', cursive;
 }
-
-button.upload-btn:hover {
-    background-color: #cc0044;
+.search-bar {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  font-size: 16px;
 }
-
-/* Gallery / Beat Store */
+.content {
+  padding: 20px;
+}
+.section {
+  margin-bottom: 40px;
+}
+.section h2 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
 .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-  }
-
-.beat-card {
-    background-color: #222;
-    margin: 10px;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 200px;
-    transition: transform 0.2s;
-  }
-
-.beat-card:hover {
-    transform: scale(1.05);
-  }
-
-.beat-image {
-    width: 100%;
-    height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
-
+.beat-card {
+  background-color: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 200px;
+  transition: transform 0.2s;
+}
+.beat-card:hover {
+  transform: scale(1.05);
+}
+.beat-image {
+  width: 100%;
+  height: auto;
+}
 .beat-info {
-    padding: 10px;
-    text-align: center;
-  }
-
-.beat-title {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 20px;
-    margin-bottom: 5px;
-  }
-
+  padding: 10px;
+  text-align: center;
+}
 .buy-btn {
-    background-color: #ff0055;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Bebas Neue', cursive;
-    font-size: 14px;
-  }
-
+  background-color: #ff0055;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
 .buy-btn:hover {
-    background-color: #cc0044;
-  }
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #222;
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-    color: #777;
+  background-color: #cc0044;
+}
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #222;
+  font-size: 14px;
+  color: #777;
 }
 </style>
 </head>
 <body>
 
-<!-- Header / Logo -->
+<!-- Header -->
 <div class="header">
   <div class="logo">Lil Trix Fuego</div>
-  <div class="subtitle">Official Type Beat Store</div>
+  <div class="nav">
+    <a href="#marketplace">Marketplace</a>
+    <a href="#upload">Upload</a>
+    <a href="#profile">Profile</a>
+    <a href="#login">Login</a>
+  </div>
+</div>
+
+<!-- Search Bar -->
+<div class="content">
+  <input type="text" class="search-bar" placeholder="Search beats..." />
+</div>
+
+<!-- Marketplace Section -->
+<div class="section" id="marketplace">
+  <h2>Beat Marketplace</h2>
+  <div class="gallery" id="beatsContainer">
+    <!-- Beats will load here dynamically -->
+  </div>
 </div>
 
 <!-- Upload Section -->
-<div class="upload-section">
+<div class="section" id="upload">
   <h2>Upload Your Beat</h2>
-  <input type="file" id="beatImage" class="upload-input" accept="image/*" />
-  <input type="text" id="beatTitle" placeholder="Beat Title" class="upload-input" />
-  <button class="upload-btn" onclick="addBeat()">Upload Beat</button>
+  <form id="uploadForm">
+    <input type="file" accept="image/*" id="beatImage" required /><br /><br />
+    <input type="text" placeholder="Beat Title" id="beatTitle" required /><br /><br />
+    <input type="file" accept="audio/*" id="beatAudio" required /><br /><br />
+    <button type="submit">Upload Beat</button>
+  </form>
 </div>
 
-<!-- Gallery / Store -->
-<div class="gallery" id="beatGallery">
-  <!-- Beat items will appear here -->
+<!-- Profile (Placeholder) -->
+<div class="section" id="profile">
+  <h2>Your Profile</h2>
+  <p>Login to manage your beats and purchases.</p>
 </div>
 
 <!-- Footer -->
-<footer>
+<div class="footer">
   &copy; 2024 Lil Trix Fuego. All rights reserved.
-</footer>
+</div>
 
+<!-- Scripts -->
 <script>
-  // Array to store beats
-  const beats = [];
-
-  function addBeat() {
-    const imageInput = document.getElementById('beatImage');
-    const titleInput = document.getElementById('beatTitle');
-
-    if (imageInput.files && imageInput.files[0] && titleInput.value.trim() !== "") {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const beat = {
-          image: e.target.result,
-          title: titleInput.value.trim()
-        };
-        beats.push(beat);
-        displayBeats();
-        // Clear inputs
-        imageInput.value = "";
-        titleInput.value = "";
-      }
-      reader.readAsDataURL(imageInput.files[0]);
-    } else {
-      alert("Please select an image and enter a title.");
-    }
+// Example data array
+const beats = [
+  {
+    title: "Sample Beat 1",
+    image: "https://via.placeholder.com/200x200.png?text=Beat+1",
+    audio: "#"
+  },
+  {
+    title: "Sample Beat 2",
+    image: "https://via.placeholder.com/200x200.png?text=Beat+2",
+    audio: "#"
   }
+];
 
-  function displayBeats() {
-    const gallery = document.getElementById('beatGallery');
-    gallery.innerHTML = "";
-    beats.forEach((beat, index) => {
-      const beatCard = document.createElement('div');
-      beatCard.className = 'beat-card';
+const container = document.getElementById('beatsContainer');
 
-      beatCard.innerHTML = `
-        <img src="${beat.image}" class="beat-image" alt="${beat.title}">
-        <div class="beat-info">
-          <div class="beat-title">${beat.title}</div>
-          <button class="buy-btn" onclick="buyBeat('${beat.title}')">Buy for $10</button>
-        </div>
-      `;
-      gallery.appendChild(beatCard);
-    });
+function loadBeats() {
+  container.innerHTML = '';
+  beats.forEach((beat, index) => {
+    const card = document.createElement('div');
+    card.className = 'beat-card';
+    card.innerHTML = `
+      <img src="${beat.image}" class="beat-image" />
+      <div class="beat-info">
+        <h3>${beat.title}</h3>
+        <button class="buy-btn" onclick="purchaseBeat('${beat.title}')">Buy for $10</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+loadBeats();
+
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const imageFile = document.getElementById('beatImage').files[0];
+  const audioFile = document.getElementById('beatAudio').files[0];
+  const title = document.getElementById('beatTitle').value.trim();
+
+  if (imageFile && audioFile && title) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const newBeat = {
+        title: title,
+        image: 'https://via.placeholder.com/200x200.png?text=New+Beat', // Replace with actual uploaded image
+        audio: '#' // Replace with actual uploaded audio
+      };
+      beats.push(newBeat);
+      loadBeats();
+    };
+    reader.readAsDataURL(imageFile);
+  } else {
+    alert('Please fill all fields and upload files.');
   }
+});
 
-  function buyBeat(title) {
-    alert('Thank you for purchasing "' + title + '"! (Implement payment gateway here)');
-  }
+function purchaseBeat(title) {
+  alert('Proceed to payment for ' + title + ' (Implement payment gateway)');
+}
 </script>
-
 </body>
 </html>
