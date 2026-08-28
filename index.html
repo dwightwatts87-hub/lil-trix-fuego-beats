@@ -105,3 +105,32 @@ function deleteBeat(index) {
 
 </body>
 </html>
+/* Example CSS for responsiveness */
+#searchInput {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+.beat {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}<div class="beat">
+  <h3>Beat Title</h3>
+  <audio controls src="path_to_audio.mp3"></audio>
+  <div contenteditable="true" class="description">Click to add description...</div>
+</div>function filterBeats() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const beatsDivs = document.querySelectorAll('.beat'); // assuming each beat has class 'beat'
+
+  beatsDivs.forEach(div => {
+    const title = div.querySelector('h3').textContent.toLowerCase(); // or the element containing the title
+    if (title.includes(query)) {
+      div.style.display = '';
+    } else {
+      div.style.display = 'none';
+    }
+  });
+}<!-- Search Input -->
+<input type="text" id="searchInput" placeholder="Search beats..." onkeyup="filterBeats()" style="width: 200px; margin-bottom: 10px;" />
