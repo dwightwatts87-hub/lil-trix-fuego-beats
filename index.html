@@ -1,211 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Type Beat Store - Lil Trix Fuego</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
-<!-- Basic styles -->
-<style>
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #111;
-  color: #fff;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #222;
-  padding: 20px;
-}
-.logo {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 48px;
-  color: #ff0055;
-}
-.nav {
-  display: flex;
-  gap: 15px;
-}
-.nav a {
-  color: #fff;
-  text-decoration: none;
-  font-family: 'Bebas Neue', cursive;
-}
-.search-bar {
-  padding: 10px;
-  border-radius: 20px;
-  border: none;
-  font-size: 16px;
-}
-.content {
-  padding: 20px;
-}
-.section {
-  margin-bottom: 40px;
-}
-.section h2 {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.beat-card {
-  background-color: #222;
-  border-radius: 10px;
-  overflow: hidden;
-  width: 200px;
-  transition: transform 0.2s;
-}
-.beat-card:hover {
-  transform: scale(1.05);
-}
-.beat-image {
-  width: 100%;
-  height: auto;
-}
-.beat-info {
-  padding: 10px;
-  text-align: center;
-}
-.buy-btn {
-  background-color: #ff0055;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-.buy-btn:hover {
-  background-color: #cc0044;
-}
-.footer {
-  text-align: center;
-  padding: 20px;
-  background: #222;
-  font-size: 14px;
-  color: #777;
-}
-</style>
-</head>
-<body>
+<!-- Upload Form -->
+<h2>Upload Your Beat</h2>
+<form id="uploadBeatForm">
+  <input type="text" placeholder="Beat Title" id="beatTitle" required /><br /><br />
+  <input type="file" accept="audio/*" id="beatFile" required /><br /><br />
+  <button type="submit">Upload Beat</button>
+</form>
 
-<!-- Header -->
-<div class="header">
-  <div class="logo">Lil Trix Fuego</div>
-  <div class="nav">
-    <a href="#marketplace">Marketplace</a>
-    <a href="#upload">Upload</a>
-    <a href="#profile">Profile</a>
-    <a href="#login">Login</a>
-  </div>
-</div>
+<!-- Beat List -->
+<h2>Your Beats</h2>
+<div id="beatsList"></div>
 
-<!-- Search Bar -->
-<div class="content">
-  <input type="text" class="search-bar" placeholder="Search beats..." />
-</div>
-
-<!-- Marketplace Section -->
-<div class="section" id="marketplace">
-  <h2>Beat Marketplace</h2>
-  <div class="gallery" id="beatsContainer">
-    <!-- Beats will load here dynamically -->
-  </div>
-</div>
-
-<!-- Upload Section -->
-<div class="section" id="upload">
-  <h2>Upload Your Beat</h2>
-  <form id="uploadForm">
-    <input type="file" accept="image/*" id="beatImage" required /><br /><br />
-    <input type="text" placeholder="Beat Title" id="beatTitle" required /><br /><br />
-    <input type="file" accept="audio/*" id="beatAudio" required /><br /><br />
-    <button type="submit">Upload Beat</button>
-  </form>
-</div>
-
-<!-- Profile (Placeholder) -->
-<div class="section" id="profile">
-  <h2>Your Profile</h2>
-  <p>Login to manage your beats and purchases.</p>
-</div>
-
-<!-- Footer -->
-<div class="footer">
-  &copy; 2024 Lil Trix Fuego. All rights reserved.
-</div>
-
-<!-- Scripts -->
 <script>
-// Example data array
-const beats = [
-  {
-    title: "Sample Beat 1",
-    image: "https://via.placeholder.com/200x200.png?text=Beat+1",
-    audio: "#"
-  },
-  {
-    title: "Sample Beat 2",
-    image: "https://via.placeholder.com/200x200.png?text=Beat+2",
-    audio: "#"
-  }
-];
+// Array to store beats
+const beats = [];
 
-const container = document.getElementById('beatsContainer');
-
-function loadBeats() {
-  container.innerHTML = '';
-  beats.forEach((beat, index) => {
-    const card = document.createElement('div');
-    card.className = 'beat-card';
-    card.innerHTML = `
-      <img src="${beat.image}" class="beat-image" />
-      <div class="beat-info">
-        <h3>${beat.title}</h3>
-        <button class="buy-btn" onclick="purchaseBeat('${beat.title}')">Buy for $10</button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
-}
-
-loadBeats();
-
-document.getElementById('uploadForm').addEventListener('submit', function(e) {
+document.getElementById('uploadBeatForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const imageFile = document.getElementById('beatImage').files[0];
-  const audioFile = document.getElementById('beatAudio').files[0];
   const title = document.getElementById('beatTitle').value.trim();
+  const file = document.getElementById('beatFile').files[0];
 
-  if (imageFile && audioFile && title) {
+  if (file && title) {
     const reader = new FileReader();
     reader.onload = function(e) {
-      const newBeat = {
+      const beat = {
         title: title,
-        image: 'https://via.placeholder.com/200x200.png?text=New+Beat', // Replace with actual uploaded image
-        audio: '#' // Replace with actual uploaded audio
+        url: e.target.result
       };
-      beats.push(newBeat);
-      loadBeats();
+      beats.push(beat);
+      displayBeats();
     };
-    reader.readAsDataURL(imageFile);
+    reader.readAsDataURL(file);
   } else {
-    alert('Please fill all fields and upload files.');
+    alert('Please enter a title and select a file.');
   }
 });
 
-function purchaseBeat(title) {
-  alert('Proceed to payment for ' + title + ' (Implement payment gateway)');
+function displayBeats() {
+  const container = document.getElementById('beatsList');
+  container.innerHTML = '';
+  beats.forEach((beat, index) => {
+    const beatDiv = document.createElement('div');
+    beatDiv.innerHTML = `
+      <h4>${beat.title}</h4>
+      <audio controls src="${beat.url}"></audio><br />
+      <a href="${beat.url}" download="${beat.title}.mp3">Download</a>
+      <hr />
+    `;
+    container.appendChild(beatDiv);
+  });
 }
 </script>
-</body>
-</html>
