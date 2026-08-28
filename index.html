@@ -3,105 +3,212 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Your Site Name</title>
-<!-- Optional: Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+<title>Type Beat Store</title>
+<!-- Custom Font - replace with your font if available -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+
 <style>
   body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
     margin: 0;
-    padding: 0;
-    color: #333;
-  }
-  header {
-    background-color: #222;
-    padding: 20px;
-    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background-color: #111;
     color: #fff;
   }
-  nav a {
-    color: #ccc;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  nav a:hover {
-    color: #fff;
-  }
-  section {
-    padding: 40px 20px;
-    max-width: 1000px;
-    margin: auto;
-  }
-  h1, h2 {
-    font-weight: 700;
-  }
-  h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-  h2 {
-    font-size: 1.5em;
-    margin-top: 30px;
-  }
-  p, ul {
-    line-height: 1.6;
-  }
-  a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  footer {
+
+  /* Logo/Header */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #222;
+    padding: 20px;
+  }
+
+.logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 48px;
+    color: #ff0055;
+    letter-spacing: 2px;
+  }
+
+.subtitle {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    margin-top: 10px;
     color: #ccc;
+  }
+
+  /* Upload Section */
+.upload-section {
+    padding: 20px;
+    text-align: center;
+    background-color: #333;
+  }
+
+.upload-section h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.upload-input {
+    margin: 10px 0;
+}
+
+button.upload-btn {
+    background-color: #ff0055;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+button.upload-btn:hover {
+    background-color: #cc0044;
+}
+
+/* Gallery / Beat Store */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+
+.beat-card {
+    background-color: #222;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    transition: transform 0.2s;
+  }
+
+.beat-card:hover {
+    transform: scale(1.05);
+  }
+
+.beat-image {
+    width: 100%;
+    height: auto;
+}
+
+.beat-info {
+    padding: 10px;
+    text-align: center;
+  }
+
+.beat-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+.buy-btn {
+    background-color: #ff0055;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 14px;
+  }
+
+.buy-btn:hover {
+    background-color: #cc0044;
+  }
+
+/* Footer */
+footer {
     text-align: center;
     padding: 20px;
-    margin-top: 40px;
-  }
+    background-color: #222;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #777;
+}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Your Site Logo</h1>
-  <nav>
-    <a href="#downloads">Downloads</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+<!-- Header / Logo -->
+<div class="header">
+  <div class="logo">Lil Trix Fuego</div>
+  <div class="subtitle">Official Type Beat Store</div>
+</div>
 
-<section id="downloads">
-  <h2>Free Downloads</h2>
-  <ul>
-    <li><a href="#">Download MP3 Lease</a></li>
-    <li><a href="#">Download WAV Lease</a></li>
-    <li><a href="#">Download Exclusive Beat</a></li>
-  </ul>
-</section>
+<!-- Upload Section -->
+<div class="upload-section">
+  <h2>Upload Your Beat</h2>
+  <input type="file" id="beatImage" class="upload-input" accept="image/*" />
+  <input type="text" id="beatTitle" placeholder="Beat Title" class="upload-input" />
+  <button class="upload-btn" onclick="addBeat()">Upload Beat</button>
+</div>
 
-<section id="about">
-  <h2>About</h2>
-  <p>Official website for LIL TRIX FUEGO - Premium Trap Type Beats</p>
-</section>
+<!-- Gallery / Store -->
+<div class="gallery" id="beatGallery">
+  <!-- Beat items will appear here -->
+</div>
 
-<section id="releases">
-  <h2>Releases</h2>
-  <p>No releases published yet. <a href="#">Create a new release</a></p>
-</section>
-
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Contact us at <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-</section>
-
+<!-- Footer -->
 <footer>
-  <p>&copy; 2023 Your Name. All rights reserved.</p>
+  &copy; 2024 Lil Trix Fuego. All rights reserved.
 </footer>
+
+<script>
+  // Array to store beats
+  const beats = [];
+
+  function addBeat() {
+    const imageInput = document.getElementById('beatImage');
+    const titleInput = document.getElementById('beatTitle');
+
+    if (imageInput.files && imageInput.files[0] && titleInput.value.trim() !== "") {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const beat = {
+          image: e.target.result,
+          title: titleInput.value.trim()
+        };
+        beats.push(beat);
+        displayBeats();
+        // Clear inputs
+        imageInput.value = "";
+        titleInput.value = "";
+      }
+      reader.readAsDataURL(imageInput.files[0]);
+    } else {
+      alert("Please select an image and enter a title.");
+    }
+  }
+
+  function displayBeats() {
+    const gallery = document.getElementById('beatGallery');
+    gallery.innerHTML = "";
+    beats.forEach((beat, index) => {
+      const beatCard = document.createElement('div');
+      beatCard.className = 'beat-card';
+
+      beatCard.innerHTML = `
+        <img src="${beat.image}" class="beat-image" alt="${beat.title}">
+        <div class="beat-info">
+          <div class="beat-title">${beat.title}</div>
+          <button class="buy-btn" onclick="buyBeat('${beat.title}')">Buy for $10</button>
+        </div>
+      `;
+      gallery.appendChild(beatCard);
+    });
+  }
+
+  function buyBeat(title) {
+    alert('Thank you for purchasing "' + title + '"! (Implement payment gateway here)');
+  }
+</script>
 
 </body>
 </html>
