@@ -1,164 +1,96 @@
-// ==========================================
-// LIL TRIX FUEGO BEAT STORE
-// Supabase connection
-// ==========================================
-
 const SUPABASE_URL = "https://jhkxavyjvehutvbhdydyh.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_Cq6cBMaJ5HIqyJMd8Nth7A_0vT3ip1s";
 
-// Supabase REST API
-const BEATS_API = `${SUPABASE_URL}/rest/v1/beats`;
-
-// ==========================================
-// LOAD BEATS FROM SUPABASE
-// ==========================================
-
 async function loadBeats() {
   try {
     const response = await fetch(
-      `${BEATS_API}?select=*`,
+      `${SUPABASE_URL}/rest/v1/beats?select=*`,
       {
-        method: "GET",
         headers: {
-          "apikey": SUPABASE_PUBLISHABLE_KEY,
-          "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
+          apikey: SUPABASE_PUBLISHABLE_KEY,
+          Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
         }
       }
     );
 
     if (!response.ok) {
-      throw new Error(`Supabase error: ${response.status}`);
+      throw new Error("Supabase error: " + response.status);
     }
 
     const beats = await response.json();
 
-    console.log("Beats loaded from Supabase:", beats);
+    console.log("Supabase beats:", beats);
 
-    displayBeats(beats);
+    const main = document.querySelector("main");
 
-  } catch (error) {
-    console.error("Could not load beats:", error);
-  }
-}
+    if (!main) return;
 
-// ==========================================
-// DISPLAY BEATS
-// ==========================================
+    const cards = main.querySelectorAll(".card");
 
-function displayBeats(beats) {
+    // The first card is the old hard-coded beat.
+    // Replace only that card, leaving Contact and the rest of the design alone.
+    if (cards.length > 0) {
+      cards[0].remove();
+    }
 
-  // Try to find the beat container used by the website
-  const container =
-    document.querySelector("#beats-container") ||
-    document.querySelector(".beats-container") ||
-    document.querySelector("#beats") ||
-    document.querySelector(".beats");
+    beats.reverse().forEach((beat) => {
+      const card = document.createElement("div");
+      card.className = "card";
 
-  if (!container) {
-    console.error(
-      "Beat container not found. We may need to connect this to the existing HTML."
-    );
-    return;
-  }
+      card.innerHTML = `
+        ${
+          beat.cover_url
+            ? `<img src="${beat.cover_url}" alt="${beat.title || "Beat cover"}"
+                 style="width:100%;border-radius:12px;margin-bottom:18px;">`
+            : ""
+        }
 
-  container.innerHTML = "";
+        <h2>${beat.title || "Untitled Beat"}</h2>
 
-  beats.forEach((beat) => {
-
-    const card = document.createElement("div");
-    card.className = "beat-card";
-
-    const cover = beat.cover_url
-      ? beat.cover_url
-      : "assets/default-cover.jpg";
-
-    const audio = beat.audio_url
-      ? beat.audio_url
-      : "";
-
-    card.innerHTML = `
-      <div class="beat-cover">
-        <img
-          src="${cover}"
-          alt="${escapeHTML(beat.title || "Beat cover")}"
-          loading="lazy"
-        >
-      </div>
-
-      <div class="beat-info">
-
-        <h3>${escapeHTML(beat.title || "Untitled Beat")}</h3>
-
-        <p>${escapeHTML(beat.artist || "Lil Trix FUEGO")}</p>
+        <p>${beat.artist || "Lil Trix FUEGO"}</p>
 
         ${
-          audio
+          beat.audio_url
             ? `
-              <audio controls preload="none">
-                <source src="${audio}" type="audio/mpeg">
+              <audio controls>
+                <source src="${beat.audio_url}" type="audio/mpeg">
                 Your browser does not support audio.
               </audio>
             `
-            : `
-              <p>Audio coming soon.</p>
-            `
+            : `<p>Audio not available yet.</p>`
         }
 
-        <div class="beat-buttons">
-          <a
-            class="lease-button"
-            href="mailto:liltrixfuego@gmail.com?subject=Lease%20Inquiry%20-%20${encodeURIComponent(
-              beat.title || "Beat"
-            )}"
-          >
-            LEASE
-          </a>
+        <div class="prices">
+          <div class="price">
+            <strong>$20</strong>
+            MP3 Lease
+          </div>
+
+          <div class="price">
+            <strong>$30</strong>
+            WAV Lease
+          </div>
+
+          <div class="price">
+            <strong>$50</strong>
+            Stems
+          </div>
+
+          <div class="price">
+            <strong>$150</strong>
+            Exclusive
+          </div>
         </div>
+      `;
 
-      </div>
-    `;
-
-    container.appendChild(card);
-  });
-}
-
-// ==========================================
-// BASIC HTML SAFETY
-// ==========================================
-
-function escapeHTML(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-// ==========================================
-// MOBILE MENU
-// ==========================================
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const menuButton =
-    document.querySelector(".menu-toggle") ||
-    document.querySelector("#menu-toggle") ||
-    document.querySelector(".hamburger");
-
-  const nav =
-    document.querySelector(".nav-menu") ||
-    document.querySelector("nav");
-
-  if (menuButton && nav) {
-    menuButton.addEventListener("click", () => {
-      nav.classList.toggle("active");
+      main.insertBefore(card, main.lastElementChild);
     });
+
+  } catch (error) {
+    console.error("Beat loading failed:", error);
   }
+}
 
-  // Load beats from Supabase
-  loadBeats();
-
-});
+document.addEventListener("DOMContentLoaded", loadBeats);
