@@ -1,56 +1,141 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lil Trix FUEGO — Type Beats</title>
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff}
-header{padding:40px 20px;text-align:center;background:#1b1b1b}
-h1{margin:0;font-size:38px} h2{font-size:28px}
-.tag{color:#bbb;margin-top:10px}
-main{max-width:850px;margin:auto;padding:30px 20px}
-.card{background:#1d1d1d;border-radius:16px;padding:25px;margin:20px 0}
-audio{width:100%;margin:15px 0}
-.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.price{background:#292929;padding:18px;border-radius:12px;text-align:center}
-.price strong{display:block;font-size:22px;margin-bottom:8px}
-.buy{display:inline-block;padding:12px 20px;border-radius:10px;background:#fff;color:#111;text-decoration:none;font-weight:bold}
-footer{text-align:center;color:#aaa;padding:30px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lil Trix FUEGO — Type Beats</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: #1b1b1b;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 38px;
+    }
+
+    .tag {
+      margin-top: 10px;
+      color: #aaa;
+    }
+
+    main {
+      max-width: 850px;
+      margin: auto;
+      padding: 25px 20px;
+    }
+
+    .card {
+      background: #1d1d1d;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    .cover {
+      width: 100%;
+      max-height: 450px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-top: 0;
+    }
+
+    audio {
+      width: 100%;
+      margin: 15px 0;
+    }
+
+    .prices {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .price {
+      background: #292929;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .price strong {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      color: #888;
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 30px;
+      }
+
+      .prices {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-<h1>🔥 Lil Trix FUEGO</h1>
-<div class="tag">Type Beats • Melodic Trap • Emotional Sounds</div>
-</header>
-<main>
-<div class="card">
-<h2>FLAMMABLE</h2>
-<p>Swae Lee type beat • Melodic • Emotional • Dark</p>
-<audio controls>
-<source src="FLAMMABLE.mp3" type="audio/mpeg">
-Your browser does not support audio.
-</audio>
-<div class="prices">
-<div class="price"><strong>$20</strong>MP3 Lease</div>
-<div class="price"><strong>$30</strong>WAV Lease</div>
-<div class="price"><strong>$50</strong>Stems</div>
-<div class="price"><strong>$150</strong>Exclusive</div>
-</div>
-<p style="margin-top:22px">Payment checkout will be added after we confirm a payment method available to producers in Solomon Islands.</p>
-</div>
-<div class="card">
-<h2>Contact</h2>
-<p>For beat purchases, custom beats, and licensing inquiries, contact Lil Trix FUEGO.</p>
-<p>Email: <em>your-email@example.com</em></p>
-</div>
-</main>
-<footer>© Lil Trix FUEGO — All rights reserved.</footer>
-</body>
-</html>
-</main>
-<footer>© Lil Trix FUEGO – All rights reserved.</footer>
-<script src="script.js"></script>
+
+  <header>
+    <h1>🔥 Lil Trix FUEGO</h1>
+    <div class="tag">
+      Type Beats • Melodic Trap • Emotional Sounds
+    </div>
+  </header>
+
+  <main>
+
+    <!-- BEATS FROM SUPABASE WILL APPEAR HERE -->
+    <div id="beats-container"></div>
+
+    <div class="card">
+      <h2>Contact</h2>
+      <p>
+        For beat purchases, custom beats, and licensing inquiries,
+        contact Lil Trix FUEGO.
+      </p>
+
+      <p>
+        Email: <em>your-email@example.com</em>
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    © Lil Trix FUEGO — All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
